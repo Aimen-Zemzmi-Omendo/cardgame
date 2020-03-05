@@ -1,77 +1,119 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-  <style>
+    <style>
+        body {
+            margin : 0;
+        }
 
-  body {
-      margin : 0;
-  }
+        .deco{
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            padding: 5px;
+            border-radius: 5px;
+            float: right;
+            margin-right 5px;
+        }
 
-  .deco{
-      background-color: red;
-      color: white;
-      text-decoration: none;
-      padding: 5px;
-      border-radius: 5px;
-      float: right;
-      margin-right 5px;
-  }
+        .deco:hover {
+            text-decoration: none;
+            color: white;
+            background-color: orange;
+            transition: 0.3s;
+        }
 
-  .deco:hover {
-      text-decoration: none;
-      color: white;
-      background-color: orange;
-      transition: 0.3s;
-  }
+        .header{
+            display: flex;
+            background-color: black;
+        }
 
-  .header{
-      display: flex;
-      background-color: black;
-  }
-
-  a {
-      text-decoration: none;
-      color: white;
-  }
+        a {
+            text-decoration: none;
+            color: white !important;
+        }
+        a:hover {
+            cursor: pointer;
+            color: blue !important;
+        }
 
 
-  .link{
-      display: flex;
-  }
+        .link{
+            display: flex;
+        }
 
-  .navbar{
-      background-color: black;
-      color: white;
-  }
+        .navbar{
+            background-color: black;
+            color: white;
+        }
 
-  h1{
-      line-height: 50vh;
-      text-align: center;
-  }
+        h1{
+            line-height: 50vh;
+            text-align: center;
+        }
+        .nav-item:hover{
+            cursor: pointer;
+            color: blue;
+        }
+    </style>
+        <nav class="navbar navbar-expand-lg ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-  </style>
-
-  <nav class="navbar navbar-expand-lg ">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/user">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/card">Cards</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category">Category</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <a href = "/logout" class = "deco">Log Out</a>
-      </form>
-    </div>
-  </nav>
-
-  <h1> Welcome {{ app.user.name }}</h1>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link card-link">Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cardCreate-link">Create Card</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link category-link">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link categoryCreate-link">Create Category</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a href = "/logout" class = "deco">Log Out</a>
+                </form>
+            </div>
+        </nav>
+    <Container>
+        <h1> Welcome {{ app.user.name }}</h1>
+    </Container>
+{% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $(".card-link").click(function(e){
+            e.preventDefault();
+            $.ajax({url: "/card", success: function(result){
+                    $("Container").html(result);
+                }});
+        });
+        $(".category-link").click(function(e){
+            e.preventDefault();
+            $.ajax({url: "/category", success: function(result){
+                    $("Container").html(result);
+                }});
+        });
+        $(".cardCreate-link").click(function(e){
+            e.preventDefault();
+            $.ajax({url: "/create-card", success: function(result){
+                    $("Container").html(result);
+                }});
+        });
+        $(".categoryCreate-link").click(function(e){
+            e.preventDefault();
+            $.ajax({url: "/create-category", success: function(result){
+                    $("Container").html(result);
+                }});
+        });
+    });
+</script>
 {% endblock %}
