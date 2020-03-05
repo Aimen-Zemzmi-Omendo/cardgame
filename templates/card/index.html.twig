@@ -27,9 +27,65 @@
             line-height: 25vh;
             text-align: center;
         }
+        .cercle {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            color: white;
+        }
+        .strike {
+            background: green;
+        }
+        .attack {
+            background: brown;
+        }
+        .hp {
+            background: red;
+        }
+        .containerCard{
+            padding: 75px;
+        }
     </style>
-
     <h1>Liste des cartes</h1>
+    <div class="containerCard">
+    {% for card in cardList %}
+        <div class="card" style="width: 18rem;display: inline-flex; margin-right: 5rem;margin-bottom: 5rem;">
+            <img class="card-img-top" style="padding: 10px;background: currentColor" src="https://www.numerama.com/content/uploads/2019/05/trou-noir-astronomie-univers-espace.jpg" alt="Card image cap">
+            <div class="card-body" style="background: currentColor">
+                <h5 class="card-title" style="text-align: center;color: white">{{ card.name }}</h5>
+                <div class="card-text" style="text-align: center">
+                    <tr>
+                        <td>
+                            <div class="cercle strike" style="display: inline-flex;color: white">
+                                {#<span style="position: absolute; margin-left: 11px; margin-top: 7px;">{{ card.strike }}</span>#}
+                                <span style="padding-left: 11px;padding-top: 8px;">{{ card.strike }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cercle attack" style="display: inline-flex;color: white">
+                                <span style="padding-left: 11px;padding-top: 8px;">{{ card.attack }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cercle hp" style="display: inline-flex;color: white">
+                                <span style="padding-left: 11px;padding-top: 8px;">{{ card.hp }}</span>
+                            </div>
+                        </td>
+                        <div style="color: white">
+                            <td>Category : {{ card.category.name }}</td>
+                        </div>
+                        <div style="color: white">
+                            {% if card.getUser is not empty %}
+                                <td>Autor : {{ card.getUser.name }}</td>
+                            {% endif %}
+                        </div>
+                    </tr>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {#<h1>Liste des cartes</h1>
 
     <table>
         <thead>
@@ -54,5 +110,5 @@
                 </tr>
             {% endfor %}
         </tbody>
-    </table>
+    </table>#}
 {% endblock %}
