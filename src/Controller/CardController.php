@@ -27,6 +27,13 @@ class CardController extends AbstractController
     }
 
     /**
+     * @Route("/user", name="user")
+     */
+    public function user(){
+        return $this->render('user/index.html.twig');
+    }
+
+    /**
      * @Route("/create-card", name="create-card")
      */
     public function createCard(Request $request): Response{
@@ -38,7 +45,7 @@ class CardController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($card);
             $entityManager->flush();       
-            return $this->redirectToRoute('card');
+            return $this->redirectToRoute('user');
         }
         return $this->render('card/form.html.twig', ['form' => $form->createView(),]);
     }

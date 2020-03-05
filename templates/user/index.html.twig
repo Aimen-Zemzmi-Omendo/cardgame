@@ -114,6 +114,19 @@
                     $("Container").html(result);
                 }});
         });
+
+        /*$("Container").on('submit', 'form', function (e) {
+            e.preventDefault();
+            var form = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                error: function (error) {
+                    console.log('error', error);
+                }
+            })
+        });*/
     });
 </script>
 {% endblock %}
