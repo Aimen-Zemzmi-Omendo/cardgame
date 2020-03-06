@@ -63,7 +63,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/user">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -84,10 +84,8 @@
                 </form>
             </div>
         </nav>
-        <div id="container">
-            <Container>
-                <h1> Welcome {{ app.user.name }}</h1>
-            </Container>
+        <div id="content">
+            <h1> Welcome {{ app.user.name }}</h1>
         </div>
     </div>
 {% endblock %}
@@ -103,11 +101,11 @@
             if (e.target.pathname == "/user"){
                 $(".container_main").load($(this).attr('href'))
             } else {
-                $("Container").load($(this).attr('href'))
+                $("#content").load($(this).attr('href'))
             }
         });
 
-        $('#container').on('submit','form', function (e) {
+        $('#content').on('submit','form', function (e) {
             e.preventDefault();
             var form = $(this);
             $.ajax({
@@ -117,7 +115,7 @@
                 contentType: false,
                 processData: false,
                 success: function success(response) {
-                    $('Container').load($('.active').attr('href'));
+                    $('#content').load($('.active').attr('href'));
                 }
 
             })

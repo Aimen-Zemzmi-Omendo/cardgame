@@ -15,7 +15,11 @@
 
     <ul>
         {% for category in categoryList %}
-            <li>{{ category.name }} </li>
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">{{ category.name }}</th>
+            </table>
         {% endfor %}
     </ul>
 {% endblock %}
