@@ -45,12 +45,21 @@
         .containerCard{
             padding: 75px;
         }
+        .card:hover {
+            box-shadow: 0 0 11px rgba(33,33,33,.8);
+        }
+        .card-img-top{
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
     </style>
-    <h1>Liste des cartes</h1>
+    <h1>Cards List</h1>
     <div class="containerCard">
     {% for card in cardList %}
-        <div class="card" style="width: 18rem;display: inline-flex; margin-right: 5rem;margin-bottom: 5rem;">
-            <img class="card-img-top" style="padding: 10px;background: currentColor" src="https://www.numerama.com/content/uploads/2019/05/trou-noir-astronomie-univers-espace.jpg" alt="Card image cap">
+        <div class="card" style="width: 18rem;display: inline-flex; margin-right: 5rem;margin-bottom: 5rem;height: 390px;">
+            <!--<img class="card-img-top" style="padding: 10px;background: currentColor" src="https://www.numerama.com/content/uploads/2019/05/trou-noir-astronomie-univers-espace.jpg" alt="Card image cap">-->
+            <div class="card-img-top" style="padding: 10px;height: 200px;background-image: url({%  if card.image %}{{ asset('uploads/cards/' ~ card.image) }}{% else %}{{ 'https://www.numerama.com/content/uploads/2019/05/trou-noir-astronomie-univers-espace.jpg' }}{% endif %})"></div>
             <div class="card-body" style="background: currentColor">
                 <h5 class="card-title" style="text-align: center;color: white">{{ card.name }}</h5>
                 <div class="card-text" style="text-align: center">
@@ -85,30 +94,4 @@
         </div>
     {% endfor %}
     </div>
-    {#<h1>Liste des cartes</h1>
-
-    <table>
-        <thead>
-            <th>Nom</th>
-            <th>Strike</th>
-            <th>Attack</th>
-            <th>HP</th>
-            <th>Category</th>
-            <th>Creator</th>
-        </thead>
-        <tbody>
-            {% for card in cardList %}
-                <tr>
-                    <td>{{ card.name }}</td>
-                    <td>{{ card.strike }}</td>
-                    <td>{{ card.attack }}</td>
-                    <td>{{ card.hp }}</td>
-                    <td>{{ card.category.name }}</td>
-                    {% if card.getUser is not empty %}
-                        <td>{{ card.getUser.name }}</td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>#}
 {% endblock %}
